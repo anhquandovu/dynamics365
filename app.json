@@ -1,0 +1,22 @@
+//A manifest file generated for our extension
+//"idRange": depends on the license
+{
+  "id": "a7a49c61-7712-400a-9fc5-bc35f8e02aa0",
+  "name": "BookShelf",
+  "publisher": "Quan Do",
+  "brief": "Creating Bookshelf list and page",
+  "description": "Creating Bookshelf list, page and link favourite book to customer page",
+  "version": "1.0.0.0",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "capabilities": [],
+  "platform": "11.0.0.0",
+  "application": "11.0.0.0",
+  "screenshots": [],
+  "idRange": {
+    "from": 50100,
+    "to": 50149
+  }
