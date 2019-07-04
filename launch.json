@@ -1,5 +1,6 @@
 //This json file contains the connection information to the service tier
-//It includes the server address, authentication needed
+//It includes the server address, authentication info needed
+//Copy the server info from the landing page: "server", "serverInstance", "tenant"
 //Change "startupObjectId" and "startupObjectType" values to run the object wanted
 {
     "version": "0.2.0",
@@ -10,6 +11,7 @@
             "name": "My server", 
             "server": "https://<vmname>.<azureregion>.cloudapp.azure.com", 
             "serverInstance": "NAV",
+            "tenant": "",
             "authentication": "UserPassword",
             "startupObjectId": 22, 
             "startupObjectType": "Page" 
