@@ -1,0 +1,17 @@
+//This json file contains configurations for the workspace.
+//Change "startupObjectId": <> to run the wanted object 
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "al",
+            "request": "launch",
+            "name": "My server", 
+            "server": "https://<vmname>.<azureregion>.cloudapp.azure.com", 
+            "serverInstance": "NAV",
+            "authentication": "UserPassword",
+            "startupObjectId": 22, 
+            "startupObjectType": "Page" 
+        }
+    ]
+}
