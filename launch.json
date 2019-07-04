@@ -1,4 +1,5 @@
-//This json file contains configurations for the workspace.
+//This json file contains the connection information to the service tier
+//It includes the server address, authentication needed
 //Change "startupObjectId" and "startupObjectType" values to run the object wanted
 {
     "version": "0.2.0",
