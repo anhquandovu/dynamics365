@@ -1,5 +1,5 @@
 //This json file contains configurations for the workspace.
-//Change "startupObjectId" value to run the object wanted
+//Change "startupObjectId" and "startupObjectType" values to run the object wanted
 {
     "version": "0.2.0",
     "configurations": [
