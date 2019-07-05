@@ -1,6 +1,11 @@
 //Demo .Net Wrapper: replacing common NameSpace and .Net Interoperability by Datatype
 codeunit 50103 DotNetWrappers
 {
+    trigger OnRun()
+    begin
+        TextDemo();
+    end;
+    
     procedure TextDemo()
     var
         myText : Text;
