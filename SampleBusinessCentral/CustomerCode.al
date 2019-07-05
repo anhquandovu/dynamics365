@@ -1,6 +1,10 @@
 //Code unit defines the logic
 //Can set property, define trigger, create procedure, subscribe to Event Publishers
 //AL originates from PASCAl, procedural language, not OOP like AX
+
+//Extending system code:AL doesn't have wrapper like AX.
+//Need to request Microsoft to create Event Publisher and then subscribe to it
+
 //Code snippet: tcodeunit, tprocedure, teventsub
 
 codeunit 50100 CustomerCode
