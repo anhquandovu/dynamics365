@@ -1,0 +1,20 @@
+//Demo .Net Wrapper: replacing common NameSpace and .Net Interoperability by Datatype
+codeunit 50103 DotNetWrappers
+{
+    procedure TextDemo()
+    var
+        myText : Text;
+        myTextBuilder : TextBuilder;
+    begin
+        myTextBuilder.AppendLine('we can append lines');
+        myTextBuilder.Append('or just add characters... ');
+        myTextBuilder.AppendLine('to the current line');
+        myTextBuilder.AppendLine('some text');
+        myTextBuilder.Replace('some text', 'replaced by some other text');
+        myText := myTextBuilder.ToText();
+        
+        myText := myText.ToUpper();
+        
+        Message(myText);
+    end;
+}
