@@ -1,10 +1,12 @@
 //this .al file defines a page extension, extending the standard page
-//Using tpageext generate a code snippet
+//Using tpageext to generate a code snippet
+//addlast(): adding an element to the last of the General tab
+
 pageextension 50100 CustomerCardMovieExtension extends "Customer Card"
 {
     layout
     {
-        addlast(General) //add an element to the last of the General tab
+        addlast(General) 
         {
             field("Favourite Movie No.";"Favourite Movie No.")
             {
