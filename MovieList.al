@@ -1,4 +1,5 @@
 //This .al file defines a List Page linked to the MovieCard 
+//Using tpage and tfieldpage to generate code snippets
 page 50101 MovieList
 {
     PageType = List;
