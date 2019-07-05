@@ -1,5 +1,6 @@
 //This json file contains the connection information to the service tier
 //It includes the server address, authentication info needed
+
 //Copy the server info from the landing page: "server", "serverInstance", "tenant"
 //Change "startupObjectId" and "startupObjectType" values to run the object wanted
 {
@@ -13,7 +14,7 @@
             "serverInstance": "NAV",
             "tenant": "",
             "authentication": "UserPassword",
-            "startupObjectId": 22, 
+            "startupObjectId": 50101, 
             "startupObjectType": "Page" 
         }
     ]
