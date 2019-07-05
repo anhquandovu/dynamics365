@@ -7,9 +7,9 @@ codeunit 50100 CustomerCode
 {
     procedure CelebrateCustomer(MyCustomer : Record Customer;ExtraMessage : Text)
     var
-        NEW_CUSMSG : Label 'We have a new customer! %1\\%2'; //Using label
+        NEW_CUSMSG : Label 'We have a new customer! %1\\%2'; //Declare label
     begin
-        Message(NEW_CUSMSG,MyCustomer."No.",ExtraMessage);
+        Message(NEW_CUSMSG,MyCustomer."No.",ExtraMessage);//Using label
     end;
     
     [EventSubscriber(ObjectType::Table, Database::Customer, 'OnAfterInsertEvent', '', true, true]
