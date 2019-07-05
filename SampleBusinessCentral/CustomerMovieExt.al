@@ -3,6 +3,7 @@
 
 //Syntax and mechanism are similar to D365F&O
 //When being extended, a 'Companion Table' is created, with same Primary Key with original Table
+//AL only recognizes single standard table
 //New Schema sync with Companion Table naming: [Company]$[Table]$[APPID]
 
 tableextension 50100 CustomerMovieExtension extends Customer
