@@ -26,7 +26,7 @@ table 50100 Movie
             Caption = 'Series';
             DataClassification = ToBeClassified;
         }
-        field(5; "Duration"; Duration)
+        field(5; Duration; Duration)
         {
             Caption = 'Duration';
             DataClassification = ToBeClassified;
