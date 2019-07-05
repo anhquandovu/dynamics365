@@ -19,4 +19,9 @@
   "idRange": {
     "from": 50100,
     "to": 50149
-  }
+  },
+  //Add this feature to generate translation file
+  "features": [
+    "TranslationFile"
+  ]
+}
