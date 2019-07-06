@@ -28,4 +28,17 @@ page 50101 MovieList
             }
         }
     }
+    //Add action run DotNetWrapper to the page
+    actions
+    {
+        area(Processing)
+        {
+            action(RunWrapper)
+            {
+                caption = "Run .NET Wrapper";
+                ApplicationArea = All;
+                RunObject = codeunit DotNetWrappers;
+            }
+        }
+    }
 }
