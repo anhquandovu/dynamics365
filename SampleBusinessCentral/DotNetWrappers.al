@@ -49,6 +49,27 @@ codeunit 50103 DotNetWrappers
         foreach CastName in CastNames do
         begin
             Message(CastName);
+            CountCharInCastName(CastName);
         end;
+    end;
+    
+    //Use Directory of [Key,Value] to count letter
+    //Directory.Get() and Directory.Set()
+    procedure CountCharInCastName(CastName : Text)
+    var
+        LetterCounter : Dictionary of [Char,Integer];
+        i : integer;
+        c : integer;
+    begin
+        clear(LetterCounter);
+        for i := 1 to StrLen(CastName) do
+        begin
+            if LetterCounter.Get(CastName[i],c) then
+                LetterCounter.Set(CastName[i],c+1);
+            else
+                LetterCounter.Set(CastName[i],1);
+        end;
+        if LetterCounter.Get('l',c) then
+            Message("The name %1 has the letter L %2 times',CastName,Format(c));
     end;
 }
