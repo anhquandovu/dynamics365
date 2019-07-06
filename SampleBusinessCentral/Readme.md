@@ -1,4 +1,4 @@
-Demo name: Movie Collection
+Demo Project: Movie Collection
 
 1. Creating Movie table, page, and link favourite movie to each customer
 2. DotNetWrapper using: Text, TextBuilder, List, Dictionary
