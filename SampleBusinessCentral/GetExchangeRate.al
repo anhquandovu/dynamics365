@@ -1,4 +1,4 @@
-//This codeunit uses HttpClient API to access to a HTTP-based web service to get the data without DotNet interop
+//This codeunit uses HttpClient API to access to a HTTP-based web service to get the data without directly having to use DotNet interop
 
 codeunit 50103 GetExchangeRate
 {
