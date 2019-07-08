@@ -1,0 +1,28 @@
+[DataMemberAttribute]
+class QD_CustReportRDPDemoContract
+{
+    CustAccount objCustAccount;
+    TransDate   fromDate, toDate;
+
+    [DataMemberAttribute("From date")]
+    public TransDate ParmFromDate(FromDate _fromDate = fromDate)
+    {
+        fromDate = _fromDate;
+        return fromDate;
+    }
+
+    [DataMemberAttribute("To date")]
+    public TransDate ParmToDate(ToDate _toDate = toDate)
+    {
+        toDate = _toDate;
+        return toDate;
+    }
+
+    [DataMemberAttribute("Customer Account No.")]
+    public CustAccount ParmCustAccount(CustAccount _custAccount = objCustAccount)
+    {
+        objCustAccount = _custAccount;
+        return objCustAccount;
+    }
+
+}
