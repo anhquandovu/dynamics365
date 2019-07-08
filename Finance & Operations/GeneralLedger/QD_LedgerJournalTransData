@@ -1,0 +1,32 @@
+// Part of task: Creating Ledger Journal
+// Extend system JournalTransData class, focuses code on Ledger Journal Creation
+public class QD_LedgerJournalTransData extends JournalTransData
+{
+    void create (boolean _doInsert = false, boolean _initVoucherlist = true)
+    {
+        lastLineNum++;
+        journalTrans.LineNum = lastLineNum;
+
+        if (journalTableData.journalVoucherNum())
+        {
+            this.initVoucher(lastVoucher, false, _initVoucherlist);
+        }
+
+        this.addTotal(false, false);
+
+        if (_doInsert)
+        {
+            journalTrans.doInsert();
+        }
+        else
+        {
+            journalTrans.insert();
+        }
+
+        if (journalTableData.journalVoucherNum())
+        {
+            lastVoucher = journalTrans.Voucher;
+        }
+    }
+
+}
