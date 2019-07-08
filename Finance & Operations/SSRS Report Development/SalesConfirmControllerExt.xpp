@@ -13,7 +13,7 @@ class SalesConfirmControllerExt extends SalesConfirmController
         SrsReportRunController formLetterController = SalesConfirmControllerExt::construct();
         SalesConfirmControllerExt controller = formLetterController;
         
-        //Parm the Report design wanted to Print
+        //Parm the Report design wanted to Run
         controller.initArgs(_args, ssrsReportStr(SalesConfirmExt, Report));
         if (classIdGet(_args.caller()) == classNum(SalesConfirmJournalPrint))
         {
