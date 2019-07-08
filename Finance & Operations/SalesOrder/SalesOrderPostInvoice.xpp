@@ -1,0 +1,24 @@
+class QuanDo_SalesOrderPosting
+{        
+    /// <summary>
+    /// Runs the class to post Sales Order Invoice
+    /// </summary>
+    public static void main(Args _args)
+    {        
+        SalesFormLetter salesFormLetter;//A Controller class for Sales Process execution
+        SalesTable  salesTable;
+        
+        salesTable = SalesTable::find('000860');//Pass a Sales Order Id to post
+
+        salesFormLetter = salesFormLetter::construct(DocumentStatus::Invoice);//DocumentStatus(Packingslip or Invoice)
+
+        //Parameters: 
+        //1.SalesRecord, 2.TransDate, 3.Quantity to be posted, 4.Summary Update, 5.Preview?Posting, 6.Print document?
+        salesFormLetter.update(salesTable, 
+                                DateTimeUtil::date(DateTimeUtil::utcNow()), 
+                                SalesUpdate::All, 
+                                AccountOrder::None,
+                                NoYes::No,
+                                NoYes::Yes);
+    }
+}
