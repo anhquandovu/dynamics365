@@ -5,4 +5,4 @@ Demo Project: Movie Collection
 3. HTTP API
 4. Operating extra logic when Installing and Upgrading Code
 5. Table & Page Extension, CodeUnit EventSubscriber, Trigger
-6. Using LABEL"
+6. Using LABEL
