@@ -1,9 +1,6 @@
+// Runable class to create Project Journal 'Hour" type
 class QD_ProjJournalCreateJob
 {        
-    /// <summary>
-    /// Runs the class with the specified arguments.
-    /// </summary>
-    /// <param name = "_args">The specified arguments.</param>
     public static void main(Args _args)
     {        
         ProjJournalTable jourTable;
@@ -13,32 +10,33 @@ class QD_ProjJournalCreateJob
         ProjJournalStatic jourStatic;
 
         ttsBegin;
+        //Set Journal Id, Name, and Type
         jourTableData = JournalTableData::newTable(jourTable);
         jourTable.JournalId = jourTableData.nextJournalId();
         jourTable.JournalType = ProjJournalType::Hour;
         jourTable.JournalNameId = 'Hour';
-
+        
+        //Initialize data from Journal Name & Id
         jourTableData.initFromJournalName(
                 ProjJournalName::find(jourTable.JournalNameId));
         jourStatic = jourTableData.journalStatic();
-        jourTransData = jourStatic.newJournalTransData(
-                jourTrans,
-                jourTableData);
-
+        jourTransData = jourStatic.newJournalTransData(jourTrans, jourTableData);
+        
+        //Initialize Journal Transaction
         jourTransData.initFromJournalTable();
         jourTrans.initValue();
-
+        
+        //Initialize Project Information
         jourTrans.ProjId = '000061';
-        jourTrans.initFromProjTable(
-                ProjTable::find(jourTrans.ProjId));
+        jourTrans.initFromProjTable(ProjTable::find(jourTrans.ProjId));
         jourTrans.TransDate = systemDateGet();
         jourTrans.ProjTransDate = jourTrans.TransDate;
         jourTrans.CategoryId = 'Car Audio';
         jourTrans.setHourCostPrice();
         jourTrans.setHourSalesPrice();
-        jourTrans.TaxItemGroupId =
-                ProjCategory::find(jourTrans.CategoryId).TaxItemGroupId;
+        jourTrans.TaxItemGroupId = ProjCategory::find(jourTrans.CategoryId).TaxItemGroupId;
 
+        //In D365F&O, using ResourceFacade to get Resource Id instead of HcmWorker
         jourTrans.Resource = ResourceFacade::findByResourceId('000049');
         jourTrans.Txt = 'Car audio installation';
         jourTrans.Qty = 8;
