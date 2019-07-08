@@ -1,5 +1,5 @@
-//Report Data Provider class
-//Decoration: Using QD_CustReportRDPDemoContract as Report Contract, providing Report Parameters
+//Report Data Provider class - This will replace Query to Fetch Data to the Report
+//Using QD_CustReportRDPDemoContract as Report Contract, providing Report Parameters
 
 [SrsReportParameterAttribute(classStr(QD_CustReportRDPDemoContract))]
 
