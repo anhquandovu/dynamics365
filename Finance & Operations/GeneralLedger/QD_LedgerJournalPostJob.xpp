@@ -1,0 +1,18 @@
+class QD_LedgerJournalPostJob
+{        
+    /// <summary>
+    /// Runable class to post a General Ledger Journal.
+    /// </summary>
+    public static void main(Args _args)
+    {
+        LedgerJournalCheckPost jourPost;
+        LedgerJournalTable jourTable;
+
+        jourTable = LedgerJournalTable::find('00635');
+        jourPost = LedgerJournalCheckPost::newLedgerJournalTable(
+                        jourTable,
+                        NoYes::Yes);
+        jourPost.run();
+    }
+
+}
