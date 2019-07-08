@@ -1,0 +1,41 @@
+class QD_SalesOrderCreate
+{        
+    /// <summary>
+    /// Runable Class creating a Sales Order 
+    /// </summary>
+    public static void main(Args _args)
+    {       
+        NumberSeq   numberSeq;
+        SalesTable  salesTable;
+        SalesLine   salesLine;
+        
+        ttsbegin;
+        numberSeq = NumberSeq::newGetNum(SalesParameters::numRefSalesId());//Get new Number Sequence for newly created SalesId
+        numberSeq.used();
+
+        salesTable.SalesId = numberSeq.num();
+        salesTable.initValue(); // Initialize SalesOrder by default value 
+        salesTable.CustAccount = 'US-017';//Assign Customer Account to create Sales Order for
+        salesTable.initFromCustTable();//Initialize other SalesOrder values from Customer
+
+        if (!salesTable.validateWrite())
+        {
+            throw Exception::Error;
+        }
+
+        salesTable.insert();
+
+        salesLine.SalesId = salesTable.SalesId;
+        salesLine.ItemId = 'D0001';
+
+        //Parameters:
+        //1.Validate?, 2.Initialize from Sales Table?, 3. Initialize from InventTable?
+        //4.Calculate Inventory Qty, 5.Add miscellanious charges, 6.Calc item price using trade agreements
+        salesLine.createLine(true, true, true, true, true, true);
+        
+        ttscommit;
+
+        info(strFmt("Sales order '%1' has been created", salesTable.SalesId));
+    }
+
+}
