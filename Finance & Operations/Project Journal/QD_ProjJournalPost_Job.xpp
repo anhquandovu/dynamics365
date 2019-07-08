@@ -1,12 +1,15 @@
+// Runable class to post a Project Journal
 class QD_ProjJournalPost_Job
 {        
-    /// <summary>
-    /// Runs the class with the specified arguments.
-    /// </summary>
-    /// <param name = "_args">The specified arguments.</param>
     public static void main(Args _args)
     {        
         ProjJournalCheckPost jourPost;
+        //Parameters:
+        //1. Block journal when posting?
+        //2. Display results in Infolog?
+        //3. Post or Validate?
+        //4. Journal Table Id
+        //5. Journal Number
         jourPost = ProjJournalCheckPost::newJournalCheckPost(
                 true,
                 true,
@@ -15,5 +18,4 @@ class QD_ProjJournalPost_Job
                 'PJJ-00424');
         jourPost.run();
     }
-
 }
