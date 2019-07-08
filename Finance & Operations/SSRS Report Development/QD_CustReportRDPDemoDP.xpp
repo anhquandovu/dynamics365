@@ -1,4 +1,8 @@
-[SrsReportParameterAttribute(classStr(RI_CustReportRDPDemoContract))]
+//Report Data Provider class
+//Decoration: Using QD_CustReportRDPDemoContract as Report Contract, providing Report Parameters
+
+[SrsReportParameterAttribute(classStr(QD_CustReportRDPDemoContract))]
+
 class QD_CustReportRDPDemoDP extends SRSReportDataProviderBase
 {
     QD_CustReportRDPDemoTmp custReportRDPDemoTmp;
@@ -8,6 +12,7 @@ class QD_CustReportRDPDemoDP extends SRSReportDataProviderBase
     CustTable   objCustTable;
     SalesTable  objSalesTable;
 
+    //Decoration: Using TempTable as Report DataSet
     [SrsReportDataSetAttribute("QD_CustReportRDPDemoTmp")]
     public QD_CustReportRDPDemoTmp getData()
     {
@@ -17,13 +22,19 @@ class QD_CustReportRDPDemoDP extends SRSReportDataProviderBase
 
     public void processReport()
     {
+        //Parm Report Parameters
         contract = this.parmDataContract();
         _fromDate = contract.ParmFromDate();
         _toDate = contract.ParmToDate();
         objCustAccount = contract.ParmCustAccount();
+        
         super();
+        
+        //Refresh TempTable
         delete_from custReportRDPDemoTmp;
         custReportRDPDemoTmp.clear();
+        
+        //Get Invoiced Customers
         while select * from objSalesTable where objSalesTable.SalesStatus == SalesStatus::Invoiced
             && (!_fromDate || objSalesTable.ShippingDateRequested >= _fromDate)
             && (!_toDate || objSalesTable.ShippingDateRequested <= _toDate)
@@ -36,5 +47,4 @@ class QD_CustReportRDPDemoDP extends SRSReportDataProviderBase
             custReportRDPDemoTmp.insert();
         }
     }
-
 }
