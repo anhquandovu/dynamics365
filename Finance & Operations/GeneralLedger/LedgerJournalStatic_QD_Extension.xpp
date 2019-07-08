@@ -1,0 +1,12 @@
+// Part of task: Creating Ledger Journal
+// Extend system LedgerJournalStatic class, construct newly created QD_LedgerJournalTransData class
+
+[ExtensionOf(classStr(LedgerJournalStatic))]
+final class LedgerJournalStatic_QD_Extension
+{
+    public JournalTransData newJournalTransData(JournalTransMap _journalTrans, JournalTableData _journalTableData)
+    {
+        next newJournalTransData(_journalTrans,_journalTableData);
+        return new QD_LedgerJournalTransData(_journalTrans,_journalTableData);
+    }
+}
