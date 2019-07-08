@@ -1,5 +1,6 @@
 // Part of task: Creating Ledger Journal
-// Extend system JournalTransData class, focuses code on Ledger Journal Creation
+// Extend system JournalTransData class,eliminate some code to focus code on Ledger Journal Creation
+
 public class QD_LedgerJournalTransData extends JournalTransData
 {
     void create (boolean _doInsert = false, boolean _initVoucherlist = true)
