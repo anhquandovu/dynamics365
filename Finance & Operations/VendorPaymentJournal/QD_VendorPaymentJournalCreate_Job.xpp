@@ -1,0 +1,59 @@
+class QD_VendorPaymentJournalCreate_Job
+{        
+    /// <summary>
+    /// Runs the class with the specified arguments.
+    /// </summary>
+    /// <param name = "_args">The specified arguments.</param>
+    public static void main(Args _args)
+    {       
+        LedgerJournalTable jourTable;
+        LedgerJournalTrans jourTrans;
+        LedgerJournalTableData jourTableData;
+        Ri_LedgerJournalTransData jourTransData;
+        LedgerJournalStatic jourStatic;
+        DimensionDynamicAccount ledgerDim;
+        DimensionDynamicAccount offsetLedgerDim;
+
+        ttsBegin;
+        /*ledgerDim = DimensionStorage::getDynamicAccount(
+                    '1001',
+                    LedgerJournalACType::Vend);*/
+        ledgerDim = LedgerDynamicAccountHelper::getDynamicAccountFromAccountNumber(
+                           '1001', LedgerJournalACType::Vend);
+        offsetLedgerDim = LedgerDynamicAccountHelper::getDynamicAccountFromAccountNumber(
+                            'USMF OPER', LedgerJournalACType::Bank);
+        jourTableData = JournalTableData::newTable(jourTable);
+
+        jourTable.JournalNum = jourTableData.nextJournalId();
+        jourTable.JournalType = LedgerJournalType::Payment;
+        jourTable.JournalName = 'VendPay';
+
+        jourTableData.initFromJournalName(LedgerJournalName::find(jourTable.JournalName));
+        jourStatic = jourTableData.journalStatic();
+
+        jourTransData = jourStatic.newJournalTransData(
+                        jourTrans,
+                        jourTableData);
+
+        jourTransData.initFromJournalTable();
+
+        jourTrans.CurrencyCode = 'USD';
+        jourTrans.initValue();
+        jourTrans.TransDate = systemDateGet();
+        jourTrans.AccountType = LedgerJournalACType::Vend;
+        jourTrans.LedgerDimension = ledgerDim;
+        jourTrans.Txt = 'Vendor payment journal demo';
+        jourTrans.OffsetAccountType = LedgerJournalACType::Bank;
+        jourTrans.OffsetLedgerDimension = offsetLedgerDim;
+        jourTrans.AmountCurDebit = 1000;
+
+        jourTransData.create();
+
+        jourTable.insert();
+
+        ttsCommit;
+
+        info(strFmt("Journal '%1' has been created", jourTable.JournalNum));
+    }
+
+}
