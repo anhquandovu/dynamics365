@@ -1,0 +1,69 @@
+class QD_LedgerJournalCreateJob
+{        
+    /// <summary>
+    /// Part of task: Creating Ledger Journal
+    /// Runable class to create a Ledger Journal having Ledger Dimension
+    /// </summary>
+    
+    public static void main(Args _args)
+    {
+        LedgerJournalTable jourTable;
+        LedgerJournalTrans jourTrans;
+        
+        //Classes to support Ledger Journal tasks
+        LedgerJournalTableData jourTableData;
+        Ri_LedgerJournalTransData jourTransData;
+        LedgerJournalStatic jourStatic
+        
+        //Tables to store Ledger Dimension
+        DimensionDynamicAccount ledgerDim;
+        DimensionDynamicAccount offsetLedgerDim;
+
+        ttsBegin;
+        
+        //Use customized getLedgerDimension method to get LedgerDimension Record 
+        ledgerDim = DimensionAttributeValueCombination::getLedgerDimension(
+                    '110180',
+                    [' ', '005', '024']);
+
+        offsetLedgerDim = DimensionAttributeValueCombination::getLedgerDimension(
+                    '170150',
+                    [' ', '005', '024']);
+
+        //Initialize Journal Table
+        jourTableData = JournalTableData::newTable(jourTable);
+
+        jourTable.JournalType = LedgerJournalType::Daily;
+        jourTable.JournalName = 'GenJrn';
+        jourTable.JournalNum = jourTableData.nextJournalId();
+
+        jourTableData.initFromJournalName(
+            LedgerJournalName::find(jourTable.JournalName));
+
+        jourStatic = jourTableData.journalStatic();
+
+        //Initialize Journal Transaction
+        jourTransData = jourStatic.newJournalTransData(
+                jourTrans,
+                jourTableData);
+
+        jourTransData.initFromJournalTable();
+
+        jourTrans.CurrencyCode = 'USD';
+        jourTrans.initValue();
+        jourTrans.TransDate = systemDateGet();
+
+        jourTrans.LedgerDimension = ledgerDim;
+        jourTrans.Txt = 'General journal demo';
+        jourTrans.OffsetLedgerDimension = offsetLedgerDim;
+        jourTrans.AmountCurDebit = 1000;
+
+        //Create journalTrans and JournalTable
+        jourTransData.create();
+        jourTable.insert();
+
+        ttsCommit;
+        info(strFmt("Journal '%1' has been created", jourTable.JournalNum));
+    }
+
+}
