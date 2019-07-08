@@ -1,0 +1,40 @@
+[SrsReportParameterAttribute(classStr(RI_CustReportRDPDemoContract))]
+class QD_CustReportRDPDemoDP extends SRSReportDataProviderBase
+{
+    QD_CustReportRDPDemoTmp custReportRDPDemoTmp;
+    QD_CustReportRDPDemoContract contract;
+    TransDate   _fromDate, _toDate;
+    CustAccount objCustAccount;
+    CustTable   objCustTable;
+    SalesTable  objSalesTable;
+
+    [SrsReportDataSetAttribute("QD_CustReportRDPDemoTmp")]
+    public QD_CustReportRDPDemoTmp getData()
+    {
+        select custReportRDPDemoTmp;
+        return custReportRDPDemoTmp;
+    }
+
+    public void processReport()
+    {
+        contract = this.parmDataContract();
+        _fromDate = contract.ParmFromDate();
+        _toDate = contract.ParmToDate();
+        objCustAccount = contract.ParmCustAccount();
+        super();
+        delete_from custReportRDPDemoTmp;
+        custReportRDPDemoTmp.clear();
+        while select * from objSalesTable where objSalesTable.SalesStatus == SalesStatus::Invoiced
+            && (!_fromDate || objSalesTable.ShippingDateRequested >= _fromDate)
+            && (!_toDate || objSalesTable.ShippingDateRequested <= _toDate)
+            join * from objCustTable where objCustTable.AccountNum==objSalesTable.CustAccount
+            && (!objCustAccount || objCustTable.AccountNum == objCustAccount)
+        {
+            custReportRDPDemoTmp.CustAccount = objCustTable.AccountNum;
+            custReportRDPDemoTmp.Name = objCustTable.name();
+            custReportRDPDemoTmp.SalesOrderInvoiceCount = any2Int(objSalesTable.RecId);
+            custReportRDPDemoTmp.insert();
+        }
+    }
+
+}
