@@ -1,4 +1,4 @@
-class QuanDo_SalesOrderPosting
+class QD_SalesOrderPosting
 {        
     /// <summary>
     /// Runs the class to post Sales Order Invoice
