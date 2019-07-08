@@ -1,0 +1,19 @@
+class SalesConfirmControllerExt extends SalesConfirmController
+{
+    public static SalesConfirmControllerExt construct()
+    {
+        return new SalesConfirmControllerExt();
+    }
+
+    public static void main(Args _args)
+    {
+        SrsReportRunController formLetterController = SalesConfirmControllerExt::construct();
+        SalesConfirmControllerExt controller = formLetterController;controller.initArgs(_args, ssrsReportStr(SalesConfirmExt, Report));
+        if (classIdGet(_args.caller()) == classNum(SalesConfirmJournalPrint))
+        {
+            formLetterController.renderingCompleted += eventhandler(SalesConfirmJournalPrint::renderingCompleted);
+        }
+        formLetterController.startOperation();
+    }
+
+}
