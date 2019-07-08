@@ -1,0 +1,19 @@
+class QD_ProjJournalPost_Job
+{        
+    /// <summary>
+    /// Runs the class with the specified arguments.
+    /// </summary>
+    /// <param name = "_args">The specified arguments.</param>
+    public static void main(Args _args)
+    {        
+        ProjJournalCheckPost jourPost;
+        jourPost = ProjJournalCheckPost::newJournalCheckPost(
+                true,
+                true,
+                JournalCheckPostType::Post,
+                tableNum(ProjJournalTable),
+                'PJJ-00424');
+        jourPost.run();
+    }
+
+}
