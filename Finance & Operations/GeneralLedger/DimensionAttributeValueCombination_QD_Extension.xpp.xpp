@@ -1,18 +1,23 @@
-class QD_GenerateLedgerDimensionAccount
-{        
-    /// <summary>
-    /// Runable job to generate Ledger Dimension Account
-    /// 1. Input: Main Account, container of Dimension Value
-    /// 2. Process: 
-    ///       a. Get Account structure from Main Account
-    ///       b. Get Dimension Hierarchy Level and Names from Account Structure
-    ///       c. For each [Hierarchy Level - Dimension Value]: Get DimensionAttributeValue
-    ///       d. Add to DimensionAttributeValueContract
-    ///       e. Get DimensionAttributeValueCombination table record from the Contract
-    /// 3. Return: DimensionAttributeValueCombination Record and DisplayValue
-    /// </summary>
-    public static void main(Args _args)
-    {        
+/// <summary>
+/// Part of task: Creating Ledger Journal
+/// Extend DimensionAttributeValueCombination table, create a static method to get LedgerDimensionAccount
+/// 1. Input: Main Account, container of Dimension Values
+/// 2. Process: 
+///       a. Get Account structure from Main Account
+///       b. Get Dimension Hierarchy Level and Names from Account Structure
+///       c. For each [Hierarchy Level - Dimension Value]: Get DimensionAttributeValue
+///       d. Add to DimensionAttributeValueContract
+///       e. Get DimensionAttributeValueCombination table record from the Contract
+/// 3. Return: DimensionAttributeValueCombination Record
+/// </summary>
+    
+[ExtensionOf(tableStr(DimensionAttributeValueCombination))]
+public static class DimensionAttributeValueCombination_QD_Extension
+{
+    static LedgerDimensionAccount getLedgerDimension(
+        MainAccountNum _mainAccountId,
+        container _values)
+    {
         int hierarchyCount;
         int hierarchyIdx;
         RecId dimAttId_MainAccount;
@@ -29,11 +34,7 @@ class QD_GenerateLedgerDimensionAccount
         List valueContracts = new List(Types::Class);
         dimensionAttributeValueCombination dimensionAttributeValueCombination;
 
-        //MainAccount: <Get from parameter>, Business Unit: 005, Department: 024
-        container _conData = [" ", "005", "024"];
-
-        //Main account: "170150": "Good will"
-        mainAccount = MainAccount::findByMainAccountId('170150');
+        mainAccount = MainAccount::findByMainAccountId(_mainAccountId);
         
         //Get Account Structure setup from a main Account: Return a RecId
         recordvalue = DimensionHierarchy::getAccountStructure(mainAccount.RecId,Ledger::current());
@@ -44,16 +45,15 @@ class QD_GenerateLedgerDimensionAccount
         //Get Dimension HierarchyLevel Names: E.g. MainAccount-BusinessUnit-Department
         DimensionSet = DimensionHierarchyLevel::getDimensionHierarchyLevelNames(recordvalue);
 
-        //
         for(hierarchyIdx = 1;hierarchyIdx<=hierarchyCount;hierarchyIdx++)
         {
             if(hierarchyIdx == 1)
-                continue;
+            continue;
             dimensionAttribute = DimensionAttribute::findByLocalizedName(DimensionSet[hierarchyIdx],false,"en-us");
             if(dimensionAttribute)
             {
                 //Get DimensionAttributeValue record from passed Attribute & Value: (E.g. Attribute: "BusinessUnit", Value: "005")
-                dimensionAttributeValue = DimensionAttributeValue::findByDimensionAttributeAndValue(dimensionAttribute,conPeek(_conData,hierarchyIdx));
+                dimensionAttributeValue = DimensionAttributeValue::findByDimensionAttributeAndValue(dimensionAttribute,conPeek(_values,hierarchyIdx));
                 
                 //Add to DimAttrValueContract
                 if(dimensionAttributeValue)
@@ -65,8 +65,8 @@ class QD_GenerateLedgerDimensionAccount
                 }
             }
         }
-        
-        LedgerAccountContract.parmMainAccount('170150');
+
+        LedgerAccountContract.parmMainAccount(_mainAccountId);
         LedgerAccountContract.parmValues(valueContracts);
         
         //Build dimension storage from LedgerAccountContract
@@ -76,7 +76,7 @@ class QD_GenerateLedgerDimensionAccount
         dimensionAttributeValueCombination = DimensionAttributeValueCombination::find(dimStorage.save());
         ledgerRecId = dimensionAttributeValueCombination.RecId;
         
-        info(strfmt("%1 & %2", ledgerRecId, dimensionAttributeValueCombination.DisplayValue));
+        return ledgerRecId;
     }
 
 }
