@@ -1,9 +1,13 @@
 [DataMemberAttribute]
+//This attribute tells that this class is applied to parm method in X++ DataContract class
+//Define datas to be serialized (in XML) as DataExchange between client and Reporting Service
+
 class QD_CustReportRDPDemoContract
 {
     CustAccount objCustAccount;
     TransDate   fromDate, toDate;
 
+    
     [DataMemberAttribute("From date")]
     public TransDate ParmFromDate(FromDate _fromDate = fromDate)
     {
