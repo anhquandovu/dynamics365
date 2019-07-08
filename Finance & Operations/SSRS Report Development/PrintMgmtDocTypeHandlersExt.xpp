@@ -1,3 +1,6 @@
+// Extending a handler for Print Manageement based Documents
+// In Print Management Setup form, Sales order confirmation tab...
+// ... this code will show one more option as Custom Report Design in addition to the Default Report Design.
 class PrintMgmtDocTypeHandlersExt
 {
     [SubscribesTo(classstr(PrintMgmtDocType), delegatestr(PrintMgmtDocType, getDefaultReportFormatDelegate))]
