@@ -1,1 +1,1 @@
-Sample codes for creating Sales Oder and posting invoices
+Sample codes for creating Sales Oder and posting Sales Order Invoice
