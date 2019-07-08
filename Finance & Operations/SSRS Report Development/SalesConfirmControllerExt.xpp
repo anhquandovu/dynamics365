@@ -1,5 +1,8 @@
+// Extending a Base Report Controller to open the wanted Report Design 
+
 class SalesConfirmControllerExt extends SalesConfirmController
 {
+    //Extend construct method to construct the extended Controller
     public static SalesConfirmControllerExt construct()
     {
         return new SalesConfirmControllerExt();
@@ -8,7 +11,10 @@ class SalesConfirmControllerExt extends SalesConfirmController
     public static void main(Args _args)
     {
         SrsReportRunController formLetterController = SalesConfirmControllerExt::construct();
-        SalesConfirmControllerExt controller = formLetterController;controller.initArgs(_args, ssrsReportStr(SalesConfirmExt, Report));
+        SalesConfirmControllerExt controller = formLetterController;
+        
+        //Parm the Report design wanted to Print
+        controller.initArgs(_args, ssrsReportStr(SalesConfirmExt, Report));
         if (classIdGet(_args.caller()) == classNum(SalesConfirmJournalPrint))
         {
             formLetterController.renderingCompleted += eventhandler(SalesConfirmJournalPrint::renderingCompleted);
