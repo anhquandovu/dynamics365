@@ -1,4 +1,4 @@
-//Demo .Net Wrapper: replacing common NameSpace and .Net Interoperability by Datatype
+//Demo .Net Wrapper: wrapping common NameSpace and .Net Interoperability by common Datatype
 //1. Text & TextBuilder
 //2. List
 //3. Dictionary
