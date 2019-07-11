@@ -1,6 +1,4 @@
-My learning journey. Moving from Dynamics 365 F&O to Dynamics 365 Business Central
-
-Dynamics AX vs. Dynamics NAV (technical)
+Dynamics AX vs. Dynamics NAV
 
 1. Report Development:
   - AX: RDL – Server Side 
@@ -9,7 +7,7 @@ Dynamics AX vs. Dynamics NAV (technical)
   
 2. Extension:
   - Both: use extension for table, form, event subscriber for codeunit
-	- AX: Have (CoC) Chain of Command for class extension
+  - AX: Have (CoC) Chain of Command for class extension
   
 3. Programming Language:
   - NAV: Procedural language, C/AL (or AL) originates from PASCAL
