@@ -19,5 +19,5 @@ Dynamics NAV (Business Central) vs. Dynamics AX (Finance & Operations)
   - AX: Can debug in extension and system module
 	
 5. IDE	
-  - NAV: C/SIDE, now Visual Studio Code
-  - AX: MorphX, now Visual Studio
+  - NAV: C/SIDE, D365 - Visual Studio Code
+  - AX: MorphX, D365 - Visual Studio
