@@ -1,4 +1,4 @@
-Dynamics AX vs. Dynamics NAV
+Dynamics NAV (Business Central) vs. Dynamics AX (Finance & Operations)
 
 1. Programming Language:
   - NAV: Procedural language, C/AL (or AL) originates from PASCAL
