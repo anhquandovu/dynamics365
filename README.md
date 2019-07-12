@@ -14,10 +14,6 @@ Dynamics NAV (Business Central) vs. Dynamics AX (Finance & Operations)
   - NAV: RDLC – Client Side 	
   - Both: Using Visual Studio and Visual Basic language to design layout
 
-4. Debugging:
-  - NAV: Can debug in extension logic
-  - AX: Can debug in extension and system module
-	
-5. IDE	
+4. IDE	
   - NAV: C/SIDE, D365 - Visual Studio Code
   - AX: MorphX, D365 - Visual Studio
