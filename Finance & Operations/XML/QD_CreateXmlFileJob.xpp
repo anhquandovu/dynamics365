@@ -1,0 +1,38 @@
+// Export Main Accounts to an xml file
+// Using XmlDocument and XmlElement to contruct xml file
+
+class QD_CreateXmlFileJob
+{        
+    public static void main(Args _args)
+    {      
+        XmlDocument doc;
+        XmlElement  nodeXml;
+        XmlElement  nodeTable;
+        XmlElement  nodeAccount;
+        XmlElement  nodeName;
+        MainAccount mainAccount;
+        #define.filename(@'C:\Temp\accounts.xml')
+
+        doc = XmlDocument::newBlank();
+        nodeXml = doc.createElement('xml');
+        doc.appendChild(nodeXml);
+        while select RecId, MainAccountId, Name from mainAccount
+            order by mainAccountId
+            where mainAccount.LedgerChartOfAccounts ==
+            LedgerChartOfAccounts::current()
+        {
+            nodeTable = doc.createElement(tableStr(MainAccount));
+            nodeTable.setAttribute(fieldStr(MainAccount, RecId), int642str(mainAccount.RecId));
+            nodeXml.appendChild(nodeTable);
+            nodeAccount = doc.createElement(fieldStr(MainAccount, MainAccountId));
+            nodeAccount.appendChild(doc.createTextNode(mainAccount.MainAccountId));
+            nodeTable.appendChild(nodeAccount);
+            nodeName = doc.createElement(fieldStr(MainAccount, Name));
+            nodeName.appendChild(doc.createTextNode(mainAccount.Name));
+            nodeTable.appendChild(nodeName);
+        }
+        doc.save(#filename);
+        info(strFmt("File %1 created.", #filename));
+    }
+
+}
