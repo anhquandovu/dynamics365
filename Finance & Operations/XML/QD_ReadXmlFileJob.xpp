@@ -1,0 +1,28 @@
+// Read Main Account lists stored in Xml file
+// Using XmlDocument, XmlElement, and XmlNodeList
+class QD_ReadXmlFileJob
+{        
+    public static void main(Args _args)
+    {      
+        XmlDocument doc;
+        XmlElement  nodeTable;
+        XmlElement  nodeAccount;
+        XmlElement  nodeName;
+        XmlNodeList data;
+        
+        #define.filename(@'C:\Temp\accounts.xml')
+
+        doc = XmlDocument::newFile(#filename);
+        data = doc.selectNodes('//' + tableStr(MainAccount));
+        nodeTable = data.nextNode();
+
+        while (nodeTable)
+        {
+            nodeAccount = nodeTable.selectSingleNode(fieldStr(MainAccount, MainAccountId));
+            nodeName = nodeTable.selectSingleNode(fieldStr(MainAccount, Name));
+            info (strFmt("%1 - %2 - %3", nodeTable.getAttribute(fieldStr(MainAccount, RecId)), nodeAccount.text(), nodeName.text())); 
+            nodeTable = data.nextNode();
+        }
+    }
+
+}
